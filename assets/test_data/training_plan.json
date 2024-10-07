@@ -1,0 +1,76 @@
+{
+  "title": "[Your Club Name] Rowing Team Annual Plan",
+  "cycles": [
+    {
+      "cycle_type": "macrocycle",
+      "name": "Annual Training Cycle",
+      "start_date": "[Please confirm the specific start date]",
+      "end_date": "[Please confirm the specific end date]",
+      "phases": [
+        {
+          "phase": "pre-season",
+          "weeks": 12
+        },
+        {
+          "phase": "in-season",
+          "weeks": 24
+        },
+        {
+          "phase": "post-season",
+          "weeks": 4
+        }
+      ],
+      "sub_cycles": [],
+      "sessions": [
+        {
+          "day": "tuesday",
+          "type": "ergo",
+          "focus_areas": "Endurance building, technique improvement",
+          "start_time": "06:00",
+          "duration": "1 hour",
+          "intensity": "moderate to high",
+          "notes": "",
+          "recovery_focus": "",
+          "rehab_details": ""
+        },
+        {
+          "day": "thursday",
+          "type": "on-water",
+          "focus_areas": "Technique work, race pace intervals",
+          "start_time": "06:00",
+          "duration": "1.5 hours",
+          "intensity": "moderate",
+          "notes": "",
+          "recovery_focus": "",
+          "rehab_details": ""
+        },
+        {
+          "day": "saturday",
+          "type": "on-water",
+          "focus_areas": "Long endurance rows, consistent pacing",
+          "start_time": "07:00",
+          "duration": "2 hours",
+          "intensity": "low to moderate",
+          "notes": "",
+          "recovery_focus": "",
+          "rehab_details": ""
+        },
+        {
+          "day": "monday",
+          "type": "gym",
+          "focus_areas": "Core stability, strength building, functional movements",
+          "start_time": "17:00",
+          "duration": "1 hour",
+          "intensity": "moderate",
+          "notes": "",
+          "recovery_focus": "",
+          "rehab_details": ""
+        }
+      ],
+      "target": {
+        "type": "team",
+        "name": "Rowing Team of 20 Members"
+      }
+    }
+  ]
+}

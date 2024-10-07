@@ -37,7 +37,7 @@ flutter_rust_bridge::frb_generated_boilerplate!(
     default_rust_auto_opaque = RustAutoOpaqueMoi,
 );
 pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_VERSION: &str = "2.4.0";
-pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = -1918914929;
+pub(crate) const FLUTTER_RUST_BRIDGE_CODEGEN_CONTENT_HASH: i32 = 83197021;
 
 // Section: executor
 
@@ -109,6 +109,104 @@ fn wire__crate__api__simple__init_app_impl(
         },
     )
 }
+fn wire__crate__api__training_plan__training_plan_test_deserialize_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "training_plan_test_deserialize",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_content = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            transform_result_sse::<_, String>((move || {
+                let output_ok =
+                    crate::api::training_plan::TrainingPlan::test_deserialize(api_content)?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
+fn wire__crate__api__training_plan__training_plan_test_deserialize_async_impl(
+    port_: flutter_rust_bridge::for_generated::MessagePort,
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_normal::<flutter_rust_bridge::for_generated::SseCodec, _, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "training_plan_test_deserialize_async",
+            port: Some(port_),
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Normal,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            let api_content = <String>::sse_decode(&mut deserializer);
+            deserializer.end();
+            move |context| {
+                transform_result_sse::<_, String>((move || {
+                    let output_ok =
+                        crate::api::training_plan::TrainingPlan::test_deserialize_async(
+                            api_content,
+                        )?;
+                    Ok(output_ok)
+                })())
+            }
+        },
+    )
+}
+fn wire__crate__api__training_plan__training_plan_test_panic_impl(
+    ptr_: flutter_rust_bridge::for_generated::PlatformGeneralizedUint8ListPtr,
+    rust_vec_len_: i32,
+    data_len_: i32,
+) -> flutter_rust_bridge::for_generated::WireSyncRust2DartSse {
+    FLUTTER_RUST_BRIDGE_HANDLER.wrap_sync::<flutter_rust_bridge::for_generated::SseCodec, _>(
+        flutter_rust_bridge::for_generated::TaskInfo {
+            debug_name: "training_plan_test_panic",
+            port: None,
+            mode: flutter_rust_bridge::for_generated::FfiCallMode::Sync,
+        },
+        move || {
+            let message = unsafe {
+                flutter_rust_bridge::for_generated::Dart2RustMessageSse::from_wire(
+                    ptr_,
+                    rust_vec_len_,
+                    data_len_,
+                )
+            };
+            let mut deserializer =
+                flutter_rust_bridge::for_generated::SseDeserializer::new(message);
+            deserializer.end();
+            transform_result_sse::<_, ()>((move || {
+                let output_ok = Result::<_, ()>::Ok({
+                    crate::api::training_plan::TrainingPlan::test_panic();
+                })?;
+                Ok(output_ok)
+            })())
+        },
+    )
+}
 
 // Section: dart2rust
 
@@ -117,6 +215,102 @@ impl SseDecode for String {
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
         let mut inner = <Vec<u8>>::sse_decode(deserializer);
         return String::from_utf8(inner).unwrap();
+    }
+}
+
+impl SseDecode for crate::api::training_plan::CycleElement {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_cycleType = <crate::api::training_plan::CycleType>::sse_decode(deserializer);
+        let mut var_endDate = <String>::sse_decode(deserializer);
+        let mut var_name = <String>::sse_decode(deserializer);
+        let mut var_phases =
+            <Vec<crate::api::training_plan::PhaseElement>>::sse_decode(deserializer);
+        let mut var_sessions =
+            <Vec<crate::api::training_plan::SessionElement>>::sse_decode(deserializer);
+        let mut var_startDate = <String>::sse_decode(deserializer);
+        let mut var_subCycles =
+            <Vec<crate::api::training_plan::CycleElement>>::sse_decode(deserializer);
+        let mut var_target = <crate::api::training_plan::Target>::sse_decode(deserializer);
+        return crate::api::training_plan::CycleElement {
+            cycle_type: var_cycleType,
+            end_date: var_endDate,
+            name: var_name,
+            phases: var_phases,
+            sessions: var_sessions,
+            start_date: var_startDate,
+            sub_cycles: var_subCycles,
+            target: var_target,
+        };
+    }
+}
+
+impl SseDecode for crate::api::training_plan::CycleType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::training_plan::CycleType::InSeason,
+            1 => crate::api::training_plan::CycleType::Macrocycle,
+            2 => crate::api::training_plan::CycleType::Mesocycle,
+            3 => crate::api::training_plan::CycleType::Microcycle,
+            4 => crate::api::training_plan::CycleType::OffSeason,
+            5 => crate::api::training_plan::CycleType::PostSeason,
+            6 => crate::api::training_plan::CycleType::PreSeason,
+            _ => unreachable!("Invalid variant for CycleType: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::api::training_plan::Day {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::training_plan::Day::Friday,
+            1 => crate::api::training_plan::Day::Monday,
+            2 => crate::api::training_plan::Day::Saturday,
+            3 => crate::api::training_plan::Day::Sunday,
+            4 => crate::api::training_plan::Day::Thursday,
+            5 => crate::api::training_plan::Day::Tuesday,
+            6 => crate::api::training_plan::Day::Wednesday,
+            _ => unreachable!("Invalid variant for Day: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for i32 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        deserializer.cursor.read_i32::<NativeEndian>().unwrap()
+    }
+}
+
+impl SseDecode for Vec<crate::api::training_plan::CycleElement> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::training_plan::CycleElement>::sse_decode(
+                deserializer,
+            ));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for Vec<crate::api::training_plan::PhaseElement> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::training_plan::PhaseElement>::sse_decode(
+                deserializer,
+            ));
+        }
+        return ans_;
     }
 }
 
@@ -132,6 +326,109 @@ impl SseDecode for Vec<u8> {
     }
 }
 
+impl SseDecode for Vec<crate::api::training_plan::SessionElement> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut len_ = <i32>::sse_decode(deserializer);
+        let mut ans_ = vec![];
+        for idx_ in 0..len_ {
+            ans_.push(<crate::api::training_plan::SessionElement>::sse_decode(
+                deserializer,
+            ));
+        }
+        return ans_;
+    }
+}
+
+impl SseDecode for crate::api::training_plan::Phase {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::training_plan::Phase::InSeason,
+            1 => crate::api::training_plan::Phase::OffSeason,
+            2 => crate::api::training_plan::Phase::PostSeason,
+            3 => crate::api::training_plan::Phase::PreSeason,
+            _ => unreachable!("Invalid variant for Phase: {}", inner),
+        };
+    }
+}
+
+impl SseDecode for crate::api::training_plan::PhaseElement {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_phase = <crate::api::training_plan::Phase>::sse_decode(deserializer);
+        let mut var_weeks = <u8>::sse_decode(deserializer);
+        return crate::api::training_plan::PhaseElement {
+            phase: var_phase,
+            weeks: var_weeks,
+        };
+    }
+}
+
+impl SseDecode for crate::api::training_plan::SessionElement {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_day = <crate::api::training_plan::Day>::sse_decode(deserializer);
+        let mut var_duration = <String>::sse_decode(deserializer);
+        let mut var_focusAreas = <String>::sse_decode(deserializer);
+        let mut var_intensity = <String>::sse_decode(deserializer);
+        let mut var_notes = <String>::sse_decode(deserializer);
+        let mut var_recoveryFocus = <String>::sse_decode(deserializer);
+        let mut var_rehabDetails = <String>::sse_decode(deserializer);
+        let mut var_startTime = <String>::sse_decode(deserializer);
+        let mut var_coordinatType = <String>::sse_decode(deserializer);
+        return crate::api::training_plan::SessionElement {
+            day: var_day,
+            duration: var_duration,
+            focus_areas: var_focusAreas,
+            intensity: var_intensity,
+            notes: var_notes,
+            recovery_focus: var_recoveryFocus,
+            rehab_details: var_rehabDetails,
+            start_time: var_startTime,
+            coordinat_type: var_coordinatType,
+        };
+    }
+}
+
+impl SseDecode for crate::api::training_plan::Target {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_name = <String>::sse_decode(deserializer);
+        let mut var_targetType = <crate::api::training_plan::Type>::sse_decode(deserializer);
+        return crate::api::training_plan::Target {
+            name: var_name,
+            target_type: var_targetType,
+        };
+    }
+}
+
+impl SseDecode for crate::api::training_plan::TrainingPlan {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut var_cycles =
+            <Vec<crate::api::training_plan::CycleElement>>::sse_decode(deserializer);
+        let mut var_title = <String>::sse_decode(deserializer);
+        return crate::api::training_plan::TrainingPlan {
+            cycles: var_cycles,
+            title: var_title,
+        };
+    }
+}
+
+impl SseDecode for crate::api::training_plan::Type {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
+        let mut inner = <i32>::sse_decode(deserializer);
+        return match inner {
+            0 => crate::api::training_plan::Type::Individual,
+            1 => crate::api::training_plan::Type::Team,
+            _ => unreachable!("Invalid variant for Type: {}", inner),
+        };
+    }
+}
+
 impl SseDecode for u8 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
@@ -142,13 +439,6 @@ impl SseDecode for u8 {
 impl SseDecode for () {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {}
-}
-
-impl SseDecode for i32 {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_decode(deserializer: &mut flutter_rust_bridge::for_generated::SseDeserializer) -> Self {
-        deserializer.cursor.read_i32::<NativeEndian>().unwrap()
-    }
 }
 
 impl SseDecode for bool {
@@ -168,6 +458,12 @@ fn pde_ffi_dispatcher_primary_impl(
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
         2 => wire__crate__api__simple__init_app_impl(port, ptr, rust_vec_len, data_len),
+        4 => wire__crate__api__training_plan__training_plan_test_deserialize_async_impl(
+            port,
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
         _ => unreachable!(),
     }
 }
@@ -181,16 +477,324 @@ fn pde_ffi_dispatcher_sync_impl(
     // Codec=Pde (Serialization + dispatch), see doc to use other codecs
     match func_id {
         1 => wire__crate__api__simple__greet_impl(ptr, rust_vec_len, data_len),
+        3 => wire__crate__api__training_plan__training_plan_test_deserialize_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
+        5 => wire__crate__api__training_plan__training_plan_test_panic_impl(
+            ptr,
+            rust_vec_len,
+            data_len,
+        ),
         _ => unreachable!(),
     }
 }
 
 // Section: rust2dart
 
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::training_plan::CycleElement {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.cycle_type.into_into_dart().into_dart(),
+            self.end_date.into_into_dart().into_dart(),
+            self.name.into_into_dart().into_dart(),
+            self.phases.into_into_dart().into_dart(),
+            self.sessions.into_into_dart().into_dart(),
+            self.start_date.into_into_dart().into_dart(),
+            self.sub_cycles.into_into_dart().into_dart(),
+            self.target.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::training_plan::CycleElement
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::training_plan::CycleElement>
+    for crate::api::training_plan::CycleElement
+{
+    fn into_into_dart(self) -> crate::api::training_plan::CycleElement {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::training_plan::CycleType {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::InSeason => 0.into_dart(),
+            Self::Macrocycle => 1.into_dart(),
+            Self::Mesocycle => 2.into_dart(),
+            Self::Microcycle => 3.into_dart(),
+            Self::OffSeason => 4.into_dart(),
+            Self::PostSeason => 5.into_dart(),
+            Self::PreSeason => 6.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::training_plan::CycleType
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::training_plan::CycleType>
+    for crate::api::training_plan::CycleType
+{
+    fn into_into_dart(self) -> crate::api::training_plan::CycleType {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::training_plan::Day {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::Friday => 0.into_dart(),
+            Self::Monday => 1.into_dart(),
+            Self::Saturday => 2.into_dart(),
+            Self::Sunday => 3.into_dart(),
+            Self::Thursday => 4.into_dart(),
+            Self::Tuesday => 5.into_dart(),
+            Self::Wednesday => 6.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::training_plan::Day
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::training_plan::Day>
+    for crate::api::training_plan::Day
+{
+    fn into_into_dart(self) -> crate::api::training_plan::Day {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::training_plan::Phase {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::InSeason => 0.into_dart(),
+            Self::OffSeason => 1.into_dart(),
+            Self::PostSeason => 2.into_dart(),
+            Self::PreSeason => 3.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::training_plan::Phase
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::training_plan::Phase>
+    for crate::api::training_plan::Phase
+{
+    fn into_into_dart(self) -> crate::api::training_plan::Phase {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::training_plan::PhaseElement {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.phase.into_into_dart().into_dart(),
+            self.weeks.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::training_plan::PhaseElement
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::training_plan::PhaseElement>
+    for crate::api::training_plan::PhaseElement
+{
+    fn into_into_dart(self) -> crate::api::training_plan::PhaseElement {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::training_plan::SessionElement {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.day.into_into_dart().into_dart(),
+            self.duration.into_into_dart().into_dart(),
+            self.focus_areas.into_into_dart().into_dart(),
+            self.intensity.into_into_dart().into_dart(),
+            self.notes.into_into_dart().into_dart(),
+            self.recovery_focus.into_into_dart().into_dart(),
+            self.rehab_details.into_into_dart().into_dart(),
+            self.start_time.into_into_dart().into_dart(),
+            self.coordinat_type.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::training_plan::SessionElement
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::training_plan::SessionElement>
+    for crate::api::training_plan::SessionElement
+{
+    fn into_into_dart(self) -> crate::api::training_plan::SessionElement {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::training_plan::Target {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.name.into_into_dart().into_dart(),
+            self.target_type.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::training_plan::Target
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::training_plan::Target>
+    for crate::api::training_plan::Target
+{
+    fn into_into_dart(self) -> crate::api::training_plan::Target {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::training_plan::TrainingPlan {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        [
+            self.cycles.into_into_dart().into_dart(),
+            self.title.into_into_dart().into_dart(),
+        ]
+        .into_dart()
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::training_plan::TrainingPlan
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::training_plan::TrainingPlan>
+    for crate::api::training_plan::TrainingPlan
+{
+    fn into_into_dart(self) -> crate::api::training_plan::TrainingPlan {
+        self
+    }
+}
+// Codec=Dco (DartCObject based), see doc to use other codecs
+impl flutter_rust_bridge::IntoDart for crate::api::training_plan::Type {
+    fn into_dart(self) -> flutter_rust_bridge::for_generated::DartAbi {
+        match self {
+            Self::Individual => 0.into_dart(),
+            Self::Team => 1.into_dart(),
+            _ => unreachable!(),
+        }
+    }
+}
+impl flutter_rust_bridge::for_generated::IntoDartExceptPrimitive
+    for crate::api::training_plan::Type
+{
+}
+impl flutter_rust_bridge::IntoIntoDart<crate::api::training_plan::Type>
+    for crate::api::training_plan::Type
+{
+    fn into_into_dart(self) -> crate::api::training_plan::Type {
+        self
+    }
+}
+
 impl SseEncode for String {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
         <Vec<u8>>::sse_encode(self.into_bytes(), serializer);
+    }
+}
+
+impl SseEncode for crate::api::training_plan::CycleElement {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::api::training_plan::CycleType>::sse_encode(self.cycle_type, serializer);
+        <String>::sse_encode(self.end_date, serializer);
+        <String>::sse_encode(self.name, serializer);
+        <Vec<crate::api::training_plan::PhaseElement>>::sse_encode(self.phases, serializer);
+        <Vec<crate::api::training_plan::SessionElement>>::sse_encode(self.sessions, serializer);
+        <String>::sse_encode(self.start_date, serializer);
+        <Vec<crate::api::training_plan::CycleElement>>::sse_encode(self.sub_cycles, serializer);
+        <crate::api::training_plan::Target>::sse_encode(self.target, serializer);
+    }
+}
+
+impl SseEncode for crate::api::training_plan::CycleType {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::training_plan::CycleType::InSeason => 0,
+                crate::api::training_plan::CycleType::Macrocycle => 1,
+                crate::api::training_plan::CycleType::Mesocycle => 2,
+                crate::api::training_plan::CycleType::Microcycle => 3,
+                crate::api::training_plan::CycleType::OffSeason => 4,
+                crate::api::training_plan::CycleType::PostSeason => 5,
+                crate::api::training_plan::CycleType::PreSeason => 6,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::api::training_plan::Day {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::training_plan::Day::Friday => 0,
+                crate::api::training_plan::Day::Monday => 1,
+                crate::api::training_plan::Day::Saturday => 2,
+                crate::api::training_plan::Day::Sunday => 3,
+                crate::api::training_plan::Day::Thursday => 4,
+                crate::api::training_plan::Day::Tuesday => 5,
+                crate::api::training_plan::Day::Wednesday => 6,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for i32 {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        serializer.cursor.write_i32::<NativeEndian>(self).unwrap();
+    }
+}
+
+impl SseEncode for Vec<crate::api::training_plan::CycleElement> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::training_plan::CycleElement>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for Vec<crate::api::training_plan::PhaseElement> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::training_plan::PhaseElement>::sse_encode(item, serializer);
+        }
     }
 }
 
@@ -204,6 +808,89 @@ impl SseEncode for Vec<u8> {
     }
 }
 
+impl SseEncode for Vec<crate::api::training_plan::SessionElement> {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(self.len() as _, serializer);
+        for item in self {
+            <crate::api::training_plan::SessionElement>::sse_encode(item, serializer);
+        }
+    }
+}
+
+impl SseEncode for crate::api::training_plan::Phase {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::training_plan::Phase::InSeason => 0,
+                crate::api::training_plan::Phase::OffSeason => 1,
+                crate::api::training_plan::Phase::PostSeason => 2,
+                crate::api::training_plan::Phase::PreSeason => 3,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
+impl SseEncode for crate::api::training_plan::PhaseElement {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::api::training_plan::Phase>::sse_encode(self.phase, serializer);
+        <u8>::sse_encode(self.weeks, serializer);
+    }
+}
+
+impl SseEncode for crate::api::training_plan::SessionElement {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <crate::api::training_plan::Day>::sse_encode(self.day, serializer);
+        <String>::sse_encode(self.duration, serializer);
+        <String>::sse_encode(self.focus_areas, serializer);
+        <String>::sse_encode(self.intensity, serializer);
+        <String>::sse_encode(self.notes, serializer);
+        <String>::sse_encode(self.recovery_focus, serializer);
+        <String>::sse_encode(self.rehab_details, serializer);
+        <String>::sse_encode(self.start_time, serializer);
+        <String>::sse_encode(self.coordinat_type, serializer);
+    }
+}
+
+impl SseEncode for crate::api::training_plan::Target {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <String>::sse_encode(self.name, serializer);
+        <crate::api::training_plan::Type>::sse_encode(self.target_type, serializer);
+    }
+}
+
+impl SseEncode for crate::api::training_plan::TrainingPlan {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <Vec<crate::api::training_plan::CycleElement>>::sse_encode(self.cycles, serializer);
+        <String>::sse_encode(self.title, serializer);
+    }
+}
+
+impl SseEncode for crate::api::training_plan::Type {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
+        <i32>::sse_encode(
+            match self {
+                crate::api::training_plan::Type::Individual => 0,
+                crate::api::training_plan::Type::Team => 1,
+                _ => {
+                    unimplemented!("");
+                }
+            },
+            serializer,
+        );
+    }
+}
+
 impl SseEncode for u8 {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
@@ -214,13 +901,6 @@ impl SseEncode for u8 {
 impl SseEncode for () {
     // Codec=Sse (Serialization based), see doc to use other codecs
     fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {}
-}
-
-impl SseEncode for i32 {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    fn sse_encode(self, serializer: &mut flutter_rust_bridge::for_generated::SseSerializer) {
-        serializer.cursor.write_i32::<NativeEndian>(self).unwrap();
-    }
 }
 
 impl SseEncode for bool {
