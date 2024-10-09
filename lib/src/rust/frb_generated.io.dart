@@ -23,46 +23,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String dco_decode_String(dynamic raw);
 
   @protected
-  CycleElement dco_decode_cycle_element(dynamic raw);
-
-  @protected
-  CycleType dco_decode_cycle_type(dynamic raw);
-
-  @protected
-  Day dco_decode_day(dynamic raw);
-
-  @protected
-  int dco_decode_i_32(dynamic raw);
-
-  @protected
-  List<CycleElement> dco_decode_list_cycle_element(dynamic raw);
-
-  @protected
-  List<PhaseElement> dco_decode_list_phase_element(dynamic raw);
-
-  @protected
   Uint8List dco_decode_list_prim_u_8_strict(dynamic raw);
 
   @protected
-  List<SessionElement> dco_decode_list_session_element(dynamic raw);
-
-  @protected
-  Phase dco_decode_phase(dynamic raw);
-
-  @protected
-  PhaseElement dco_decode_phase_element(dynamic raw);
-
-  @protected
-  SessionElement dco_decode_session_element(dynamic raw);
-
-  @protected
-  Target dco_decode_target(dynamic raw);
-
-  @protected
   TrainingPlan dco_decode_training_plan(dynamic raw);
-
-  @protected
-  Type dco_decode_type(dynamic raw);
 
   @protected
   int dco_decode_u_8(dynamic raw);
@@ -74,49 +38,10 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   String sse_decode_String(SseDeserializer deserializer);
 
   @protected
-  CycleElement sse_decode_cycle_element(SseDeserializer deserializer);
-
-  @protected
-  CycleType sse_decode_cycle_type(SseDeserializer deserializer);
-
-  @protected
-  Day sse_decode_day(SseDeserializer deserializer);
-
-  @protected
-  int sse_decode_i_32(SseDeserializer deserializer);
-
-  @protected
-  List<CycleElement> sse_decode_list_cycle_element(
-      SseDeserializer deserializer);
-
-  @protected
-  List<PhaseElement> sse_decode_list_phase_element(
-      SseDeserializer deserializer);
-
-  @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer);
 
   @protected
-  List<SessionElement> sse_decode_list_session_element(
-      SseDeserializer deserializer);
-
-  @protected
-  Phase sse_decode_phase(SseDeserializer deserializer);
-
-  @protected
-  PhaseElement sse_decode_phase_element(SseDeserializer deserializer);
-
-  @protected
-  SessionElement sse_decode_session_element(SseDeserializer deserializer);
-
-  @protected
-  Target sse_decode_target(SseDeserializer deserializer);
-
-  @protected
   TrainingPlan sse_decode_training_plan(SseDeserializer deserializer);
-
-  @protected
-  Type sse_decode_type(SseDeserializer deserializer);
 
   @protected
   int sse_decode_u_8(SseDeserializer deserializer);
@@ -125,63 +50,29 @@ abstract class RustLibApiImplPlatform extends BaseApiImpl<RustLibWire> {
   void sse_decode_unit(SseDeserializer deserializer);
 
   @protected
+  int sse_decode_i_32(SseDeserializer deserializer);
+
+  @protected
   bool sse_decode_bool(SseDeserializer deserializer);
 
   @protected
   void sse_encode_String(String self, SseSerializer serializer);
 
   @protected
-  void sse_encode_cycle_element(CycleElement self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_cycle_type(CycleType self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_day(Day self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_i_32(int self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_list_cycle_element(
-      List<CycleElement> self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_list_phase_element(
-      List<PhaseElement> self, SseSerializer serializer);
-
-  @protected
   void sse_encode_list_prim_u_8_strict(
       Uint8List self, SseSerializer serializer);
 
   @protected
-  void sse_encode_list_session_element(
-      List<SessionElement> self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_phase(Phase self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_phase_element(PhaseElement self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_session_element(
-      SessionElement self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_target(Target self, SseSerializer serializer);
-
-  @protected
   void sse_encode_training_plan(TrainingPlan self, SseSerializer serializer);
-
-  @protected
-  void sse_encode_type(Type self, SseSerializer serializer);
 
   @protected
   void sse_encode_u_8(int self, SseSerializer serializer);
 
   @protected
   void sse_encode_unit(void self, SseSerializer serializer);
+
+  @protected
+  void sse_encode_i_32(int self, SseSerializer serializer);
 
   @protected
   void sse_encode_bool(bool self, SseSerializer serializer);

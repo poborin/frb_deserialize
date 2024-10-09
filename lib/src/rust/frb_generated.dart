@@ -69,7 +69,7 @@ class RustLib extends BaseEntrypoint<RustLibApi, RustLibApiImpl, RustLibWire> {
   String get codegenVersion => '2.4.0';
 
   @override
-  int get rustContentHash => 83197021;
+  int get rustContentHash => -341819965;
 
   static const kDefaultExternalLibraryLoaderConfig =
       ExternalLibraryLoaderConfig(
@@ -86,11 +86,6 @@ abstract class RustLibApi extends BaseApi {
 
   TrainingPlan crateApiTrainingPlanTrainingPlanTestDeserialize(
       {required String content});
-
-  Future<TrainingPlan> crateApiTrainingPlanTrainingPlanTestDeserializeAsync(
-      {required String content});
-
-  void crateApiTrainingPlanTrainingPlanTestPanic();
 }
 
 class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
@@ -172,108 +167,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
         argNames: ["content"],
       );
 
-  @override
-  Future<TrainingPlan> crateApiTrainingPlanTrainingPlanTestDeserializeAsync(
-      {required String content}) {
-    return handler.executeNormal(NormalTask(
-      callFfi: (port_) {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        sse_encode_String(content, serializer);
-        pdeCallFfi(generalizedFrbRustBinding, serializer,
-            funcId: 4, port: port_);
-      },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_training_plan,
-        decodeErrorData: sse_decode_String,
-      ),
-      constMeta: kCrateApiTrainingPlanTrainingPlanTestDeserializeAsyncConstMeta,
-      argValues: [content],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta
-      get kCrateApiTrainingPlanTrainingPlanTestDeserializeAsyncConstMeta =>
-          const TaskConstMeta(
-            debugName: "training_plan_test_deserialize_async",
-            argNames: ["content"],
-          );
-
-  @override
-  void crateApiTrainingPlanTrainingPlanTestPanic() {
-    return handler.executeSync(SyncTask(
-      callFfi: () {
-        final serializer = SseSerializer(generalizedFrbRustBinding);
-        return pdeCallFfi(generalizedFrbRustBinding, serializer, funcId: 5)!;
-      },
-      codec: SseCodec(
-        decodeSuccessData: sse_decode_unit,
-        decodeErrorData: null,
-      ),
-      constMeta: kCrateApiTrainingPlanTrainingPlanTestPanicConstMeta,
-      argValues: [],
-      apiImpl: this,
-    ));
-  }
-
-  TaskConstMeta get kCrateApiTrainingPlanTrainingPlanTestPanicConstMeta =>
-      const TaskConstMeta(
-        debugName: "training_plan_test_panic",
-        argNames: [],
-      );
-
   @protected
   String dco_decode_String(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     return raw as String;
-  }
-
-  @protected
-  CycleElement dco_decode_cycle_element(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 8)
-      throw Exception('unexpected arr length: expect 8 but see ${arr.length}');
-    return CycleElement(
-      cycleType: dco_decode_cycle_type(arr[0]),
-      endDate: dco_decode_String(arr[1]),
-      name: dco_decode_String(arr[2]),
-      phases: dco_decode_list_phase_element(arr[3]),
-      sessions: dco_decode_list_session_element(arr[4]),
-      startDate: dco_decode_String(arr[5]),
-      subCycles: dco_decode_list_cycle_element(arr[6]),
-      target: dco_decode_target(arr[7]),
-    );
-  }
-
-  @protected
-  CycleType dco_decode_cycle_type(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return CycleType.values[raw as int];
-  }
-
-  @protected
-  Day dco_decode_day(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Day.values[raw as int];
-  }
-
-  @protected
-  int dco_decode_i_32(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return raw as int;
-  }
-
-  @protected
-  List<CycleElement> dco_decode_list_cycle_element(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>).map(dco_decode_cycle_element).toList();
-  }
-
-  @protected
-  List<PhaseElement> dco_decode_list_phase_element(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>).map(dco_decode_phase_element).toList();
   }
 
   @protected
@@ -283,76 +180,14 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<SessionElement> dco_decode_list_session_element(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return (raw as List<dynamic>).map(dco_decode_session_element).toList();
-  }
-
-  @protected
-  Phase dco_decode_phase(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Phase.values[raw as int];
-  }
-
-  @protected
-  PhaseElement dco_decode_phase_element(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return PhaseElement(
-      phase: dco_decode_phase(arr[0]),
-      weeks: dco_decode_u_8(arr[1]),
-    );
-  }
-
-  @protected
-  SessionElement dco_decode_session_element(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 9)
-      throw Exception('unexpected arr length: expect 9 but see ${arr.length}');
-    return SessionElement(
-      day: dco_decode_day(arr[0]),
-      duration: dco_decode_String(arr[1]),
-      focusAreas: dco_decode_String(arr[2]),
-      intensity: dco_decode_String(arr[3]),
-      notes: dco_decode_String(arr[4]),
-      recoveryFocus: dco_decode_String(arr[5]),
-      rehabDetails: dco_decode_String(arr[6]),
-      startTime: dco_decode_String(arr[7]),
-      coordinatType: dco_decode_String(arr[8]),
-    );
-  }
-
-  @protected
-  Target dco_decode_target(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
-    return Target(
-      name: dco_decode_String(arr[0]),
-      targetType: dco_decode_type(arr[1]),
-    );
-  }
-
-  @protected
   TrainingPlan dco_decode_training_plan(dynamic raw) {
     // Codec=Dco (DartCObject based), see doc to use other codecs
     final arr = raw as List<dynamic>;
-    if (arr.length != 2)
-      throw Exception('unexpected arr length: expect 2 but see ${arr.length}');
+    if (arr.length != 1)
+      throw Exception('unexpected arr length: expect 1 but see ${arr.length}');
     return TrainingPlan(
-      cycles: dco_decode_list_cycle_element(arr[0]),
-      title: dco_decode_String(arr[1]),
+      weeks: dco_decode_u_8(arr[0]),
     );
-  }
-
-  @protected
-  Type dco_decode_type(dynamic raw) {
-    // Codec=Dco (DartCObject based), see doc to use other codecs
-    return Type.values[raw as int];
   }
 
   @protected
@@ -375,74 +210,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  CycleElement sse_decode_cycle_element(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_cycleType = sse_decode_cycle_type(deserializer);
-    var var_endDate = sse_decode_String(deserializer);
-    var var_name = sse_decode_String(deserializer);
-    var var_phases = sse_decode_list_phase_element(deserializer);
-    var var_sessions = sse_decode_list_session_element(deserializer);
-    var var_startDate = sse_decode_String(deserializer);
-    var var_subCycles = sse_decode_list_cycle_element(deserializer);
-    var var_target = sse_decode_target(deserializer);
-    return CycleElement(
-        cycleType: var_cycleType,
-        endDate: var_endDate,
-        name: var_name,
-        phases: var_phases,
-        sessions: var_sessions,
-        startDate: var_startDate,
-        subCycles: var_subCycles,
-        target: var_target);
-  }
-
-  @protected
-  CycleType sse_decode_cycle_type(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return CycleType.values[inner];
-  }
-
-  @protected
-  Day sse_decode_day(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return Day.values[inner];
-  }
-
-  @protected
-  int sse_decode_i_32(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    return deserializer.buffer.getInt32();
-  }
-
-  @protected
-  List<CycleElement> sse_decode_list_cycle_element(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <CycleElement>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_cycle_element(deserializer));
-    }
-    return ans_;
-  }
-
-  @protected
-  List<PhaseElement> sse_decode_list_phase_element(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <PhaseElement>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_phase_element(deserializer));
-    }
-    return ans_;
-  }
-
-  @protected
   Uint8List sse_decode_list_prim_u_8_strict(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
     var len_ = sse_decode_i_32(deserializer);
@@ -450,78 +217,10 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  List<SessionElement> sse_decode_list_session_element(
-      SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-
-    var len_ = sse_decode_i_32(deserializer);
-    var ans_ = <SessionElement>[];
-    for (var idx_ = 0; idx_ < len_; ++idx_) {
-      ans_.add(sse_decode_session_element(deserializer));
-    }
-    return ans_;
-  }
-
-  @protected
-  Phase sse_decode_phase(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return Phase.values[inner];
-  }
-
-  @protected
-  PhaseElement sse_decode_phase_element(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_phase = sse_decode_phase(deserializer);
-    var var_weeks = sse_decode_u_8(deserializer);
-    return PhaseElement(phase: var_phase, weeks: var_weeks);
-  }
-
-  @protected
-  SessionElement sse_decode_session_element(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_day = sse_decode_day(deserializer);
-    var var_duration = sse_decode_String(deserializer);
-    var var_focusAreas = sse_decode_String(deserializer);
-    var var_intensity = sse_decode_String(deserializer);
-    var var_notes = sse_decode_String(deserializer);
-    var var_recoveryFocus = sse_decode_String(deserializer);
-    var var_rehabDetails = sse_decode_String(deserializer);
-    var var_startTime = sse_decode_String(deserializer);
-    var var_coordinatType = sse_decode_String(deserializer);
-    return SessionElement(
-        day: var_day,
-        duration: var_duration,
-        focusAreas: var_focusAreas,
-        intensity: var_intensity,
-        notes: var_notes,
-        recoveryFocus: var_recoveryFocus,
-        rehabDetails: var_rehabDetails,
-        startTime: var_startTime,
-        coordinatType: var_coordinatType);
-  }
-
-  @protected
-  Target sse_decode_target(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_name = sse_decode_String(deserializer);
-    var var_targetType = sse_decode_type(deserializer);
-    return Target(name: var_name, targetType: var_targetType);
-  }
-
-  @protected
   TrainingPlan sse_decode_training_plan(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    var var_cycles = sse_decode_list_cycle_element(deserializer);
-    var var_title = sse_decode_String(deserializer);
-    return TrainingPlan(cycles: var_cycles, title: var_title);
-  }
-
-  @protected
-  Type sse_decode_type(SseDeserializer deserializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    var inner = sse_decode_i_32(deserializer);
-    return Type.values[inner];
+    var var_weeks = sse_decode_u_8(deserializer);
+    return TrainingPlan(weeks: var_weeks);
   }
 
   @protected
@@ -533,6 +232,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_decode_unit(SseDeserializer deserializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+  }
+
+  @protected
+  int sse_decode_i_32(SseDeserializer deserializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    return deserializer.buffer.getInt32();
   }
 
   @protected
@@ -548,57 +253,6 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_cycle_element(CycleElement self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_cycle_type(self.cycleType, serializer);
-    sse_encode_String(self.endDate, serializer);
-    sse_encode_String(self.name, serializer);
-    sse_encode_list_phase_element(self.phases, serializer);
-    sse_encode_list_session_element(self.sessions, serializer);
-    sse_encode_String(self.startDate, serializer);
-    sse_encode_list_cycle_element(self.subCycles, serializer);
-    sse_encode_target(self.target, serializer);
-  }
-
-  @protected
-  void sse_encode_cycle_type(CycleType self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
-  }
-
-  @protected
-  void sse_encode_day(Day self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
-  }
-
-  @protected
-  void sse_encode_i_32(int self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    serializer.buffer.putInt32(self);
-  }
-
-  @protected
-  void sse_encode_list_cycle_element(
-      List<CycleElement> self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_cycle_element(item, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_list_phase_element(
-      List<PhaseElement> self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_phase_element(item, serializer);
-    }
-  }
-
-  @protected
   void sse_encode_list_prim_u_8_strict(
       Uint8List self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
@@ -607,61 +261,9 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   }
 
   @protected
-  void sse_encode_list_session_element(
-      List<SessionElement> self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.length, serializer);
-    for (final item in self) {
-      sse_encode_session_element(item, serializer);
-    }
-  }
-
-  @protected
-  void sse_encode_phase(Phase self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
-  }
-
-  @protected
-  void sse_encode_phase_element(PhaseElement self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_phase(self.phase, serializer);
-    sse_encode_u_8(self.weeks, serializer);
-  }
-
-  @protected
-  void sse_encode_session_element(
-      SessionElement self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_day(self.day, serializer);
-    sse_encode_String(self.duration, serializer);
-    sse_encode_String(self.focusAreas, serializer);
-    sse_encode_String(self.intensity, serializer);
-    sse_encode_String(self.notes, serializer);
-    sse_encode_String(self.recoveryFocus, serializer);
-    sse_encode_String(self.rehabDetails, serializer);
-    sse_encode_String(self.startTime, serializer);
-    sse_encode_String(self.coordinatType, serializer);
-  }
-
-  @protected
-  void sse_encode_target(Target self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_String(self.name, serializer);
-    sse_encode_type(self.targetType, serializer);
-  }
-
-  @protected
   void sse_encode_training_plan(TrainingPlan self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_list_cycle_element(self.cycles, serializer);
-    sse_encode_String(self.title, serializer);
-  }
-
-  @protected
-  void sse_encode_type(Type self, SseSerializer serializer) {
-    // Codec=Sse (Serialization based), see doc to use other codecs
-    sse_encode_i_32(self.index, serializer);
+    sse_encode_u_8(self.weeks, serializer);
   }
 
   @protected
@@ -673,6 +275,12 @@ class RustLibApiImpl extends RustLibApiImplPlatform implements RustLibApi {
   @protected
   void sse_encode_unit(void self, SseSerializer serializer) {
     // Codec=Sse (Serialization based), see doc to use other codecs
+  }
+
+  @protected
+  void sse_encode_i_32(int self, SseSerializer serializer) {
+    // Codec=Sse (Serialization based), see doc to use other codecs
+    serializer.buffer.putInt32(self);
   }
 
   @protected
